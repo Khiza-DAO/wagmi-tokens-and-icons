@@ -1,9 +1,11 @@
 import Address from "./types/Address";
 import TokenBase from "./TokenBase";
 import IToken from "./interfaces/IToken";
+import { zeroAddress } from "viem";
 
 export default class Token extends TokenBase implements IToken {
-  address: Address;
+  _address?: Address;
+  isNative?: boolean;
   maxSupply?: BigInt;
 
   constructor({
@@ -12,6 +14,7 @@ export default class Token extends TokenBase implements IToken {
     name,
     symbol,
     address,
+    isNative,
     maxSupply,
     note,
   }: IToken) {
@@ -24,5 +27,18 @@ export default class Token extends TokenBase implements IToken {
     });
     this.address = address;
     this.maxSupply = maxSupply;
+    this.isNative = isNative || false;
+  }
+
+  get address() {
+    return this.isNative ? zeroAddress : this._address
+  }
+
+  set address(v: Address | undefined) {
+    if (this.isNative && v !== zeroAddress) {
+      throw new Error("Native token address must be zero");
+    }
+
+    this._address = v;
   }
 }
