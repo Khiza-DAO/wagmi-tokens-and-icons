@@ -17,6 +17,7 @@ export type TokenSymbols =
   | "usdt"
   | "wbtc"
   | "weth"
+  | "xdai"
   | "AVAX"
   | "BNB"
   | "BUSD"
@@ -35,8 +36,7 @@ export type TokenSymbols =
   | "USDT"
   | "WBTC"
   | "WETH"
-  & string
-
+  | "XDAI";
 
 export interface ITokenBase {
   name: string;

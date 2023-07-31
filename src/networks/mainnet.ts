@@ -1,9 +1,9 @@
 import { mainnet as wagmiRef, Chain } from "@wagmi/chains";
-import { eth } from "../tokens/eth";
 import {
   bnb,
   busd,
   dai,
+  eth,
   frax,
   matic,
   steth,
@@ -15,20 +15,7 @@ import {
   weth,
 } from "../tokens";
 import Token from "../models/Token";
-import { Address } from "viem";
-
-type customContract = {
-  address: Address;
-};
-
-type AditionalChainInfo = {
-  tokens: {
-    [key: string]: Token;
-  };
-  customContracts: {
-    [key:string]: customContract;
-  };
-};
+import { AditionalChainInfo } from "./types";
 
 export const mainnet = {
   ...wagmiRef,
@@ -87,10 +74,10 @@ export const mainnet = {
     }),
   },
   customContracts: {
-    toklyRegistry: {
-      address: "0x",
-    },
+    // toklyRegistry: {
+    //   address: "0x",
+    // },
   },
-} as const satisfies Chain & AditionalChainInfo
+} as const satisfies Chain & AditionalChainInfo;
 
 export default mainnet;
