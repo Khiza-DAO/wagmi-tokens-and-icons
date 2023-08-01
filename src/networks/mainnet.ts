@@ -15,7 +15,7 @@ import {
   weth,
 } from "../tokens";
 import Token from "../models/Token";
-import { AditionalChainInfo } from "./types";
+import { TokensAddition } from "./types";
 
 export const mainnet = {
   ...wagmiRef,
@@ -73,11 +73,6 @@ export const mainnet = {
       address: "0x853d955aCEf822Db058eb8505911ED77F175b99e",
     }),
   },
-  customContracts: {
-    // toklyRegistry: {
-    //   address: "0x",
-    // },
-  },
-} as const satisfies Chain & AditionalChainInfo;
+} as const satisfies Chain & TokensAddition;
 
 export default mainnet;

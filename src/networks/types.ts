@@ -5,11 +5,8 @@ export type customContract = {
   address: Address;
 };
 
-export type AditionalChainInfo = {
+export type TokensAddition = {
   tokens: {
     [key: string]: Token;
-  };
-  customContracts?: {
-    [key: string]: customContract;
   };
 };
