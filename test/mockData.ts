@@ -1,4 +1,6 @@
 import { ContractDict } from "../src/models/ContractDict";
+import mainnet from "../src/networks/mainnet";
+import polygon from '../src/networks/polygon';
 
 export const tokenERC20 = {
   id: "abc",
@@ -7,8 +9,8 @@ export const tokenERC20 = {
   type: "ERC20",
   icon: "",
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 };
 
@@ -19,8 +21,8 @@ export const tokenERC721 = {
   type: "ERC721",
   png: "",
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 };
 
@@ -30,8 +32,8 @@ export const tokenCustom = {
   type: "custom",
   abi: [],
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 };
 
@@ -42,8 +44,8 @@ export const tokenERC20asConst = {
   type: "ERC20",
   icon: "",
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 } as const satisfies ContractDict;
 
@@ -54,8 +56,8 @@ export const tokenERC721asConst = {
   type: "ERC721",
   png: "",
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 } as const satisfies ContractDict;
 
@@ -65,8 +67,8 @@ export const tokenCustomAsConst = {
   type: "custom",
   abi: [],
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 } as const satisfies ContractDict;
 
@@ -75,8 +77,8 @@ export const wrongTokenERC20 = {
   name: "abc",
   type: "ERC20",
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 };
 
@@ -86,8 +88,8 @@ export const wrongTokenERC721 = {
   type: "ERC721",
   abi: [],
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 };
 
@@ -97,7 +99,7 @@ export const wrongTokenCustom = {
   type: "custom",
   symbol: "ABC",
   chains: {
-    1: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    137: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 };

@@ -1,3 +1,4 @@
+import { expectTypeOf } from "vitest";
 import { avalanche, mainnet } from "../src/networks";
 import {
   tokenCustom,
@@ -6,14 +7,9 @@ import {
   tokenERC20asConst,
   tokenERC721,
   tokenERC721asConst,
-  wrongTokenCustom,
 } from "./mockData";
-import { Chain } from "viem";
-import { AditionalChainInfo } from "../src/networks/types";
-import { expectTypeOf } from "vitest";
 
-
-describe("contractDict tokenERC20 tests:", () => {
+describe("tokenERC20:", () => {
   test("-> tokenERC20asConst equal to tokenERC20          => true", () => {
     expect(tokenERC20asConst).toEqual(tokenERC20);
   });
@@ -41,7 +37,7 @@ describe("contractDict tokenERC20 tests:", () => {
   });
 });
 
-describe("contractDict tokenERC721 tests:", () => {
+describe("tokenERC721:", () => {
   test("-> tokenERC721asConst equal to tokenERC721         => true", () => {
     expect(tokenERC721asConst).toEqual(tokenERC721);
   });
@@ -94,15 +90,5 @@ describe("tokenCustom", () => {
 
   test("->.chains[avalanche.id = ?]     => undefined", () => {
     expect(tokenCustomAsConst.chains[avalanche.id]).toBeUndefined();
-  });
-});
-
-describe("Contract dict error", () => {
-  test("-> equal to tokenCustom         => true", () => {
-    // expectTypeOf(wrongTokenCustom ).toMatchTypeOf<Chain & AditionalChainInfo>()
-  });
-
-  test("->.chains[1].address            => '0xC02a...56Cc2'", () => {
-    expect(tokenCustomAsConst.chains[1].address);
   });
 });
