@@ -32,53 +32,18 @@ POLYGON_CONTRACT_B_ADDRESS=0x000cba
 ```typescript
 import { mainnet, polygon } from "@khizadao/chain-dictionary";
 
-// Define um tipo para definições de contratos conhecidos
-const customContracts = {
-  id: "usdc", // identificador
-  name: "Circle USD", // nome legível
-  symbol: "USDC", // símbolo legível (somente para tokens e NFTs)
-  type: "ERC20", // ERC20 (tokens), ERC721 (NFTs) ou custom
-  abi: [], // apenas custom
-  chains: {
-    [mainnet.id]: { address: "0x000cba" },
-    // por padrão pega os dados acima, mas se passar aqui sobrescreve
-    [polygon.id]: { address: "0x000cba", name: "(PoS) Tether USD" },
-  },
-} as const satisfies CustomContract;
-
-// Instanciar um dicionário de redes passando as definições
-// const dictionary = new ChainDictionary({
-//     contracts: customContracts,
-// })
-
-// Ou registrar as definições posteriormente
-// dictionary.register({
-//     id: 'tokly-registry',
-//     name: 'Tokly Registry',
-//     type: 'custom',
-//     abi: [...],
-//     chains: {
-//         [mainnet.id]: { address: '0x000cba' },
-//         [polygon.id]: { address: '0x000cba' },
-//     }
-// })
-
 // Pegar as definições de uma rede através do seu id
 //const mainnet = dictionary.findByChainId(1)
 import { mainnet } from "@khizadao/chain-dictionary";
 
 // Exemplo: pegar o endereço de um contrato a partir da instância da rede
-// mainnet.getContract('usdc').address
-// mainnet.customContracts.usdc.address // Bônus: deixar por último
-mainnet.tokens.usdc;
+mainnet.tokens.usdc.address;
 
 // Exemplo: acessar propriedades do @wagmi/chains
 mainnet.blockExplorer.etherscan;
 
 // Exemplo: pegar chain e contrato a partir do seletor de rede
-// const chainId = 137 // que vem do seletor de rede
-// dictionary.find(chainId).getContract('usdc').address
-polygon.tokens.usdc.address;
+(some kind of web3plugin).network.tokens.usdc.address;
 
 // Pega custom Contracts
 const myCustomContract = {
@@ -87,21 +52,36 @@ const myCustomContract = {
   type: "custom", // can be "ERC20" or "ERC721", those have symbol property
   abi: [], // abi is only for "custom"
   // icon or png only with "ERC20" or "ERC721"
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
 } as const satisfies ContractDict;
+
+// Define um tipo para definições de contratos conhecidos
+const customContracts = {
+  id: "usdc", // identificador
+  name: "Circle USD", // nome legível
+  symbol: "USDC", // símbolo legível (somente para tokens e NFTs)
+  type: "ERC20", // ERC20 (tokens), ERC721 (NFTs) ou custom
+  //abi: [],  apenas custom
+  chainsAddress: {
+    [mainnet.id]: { address: "0x000cba" },
+    // por padrão pega os dados acima, mas se passar aqui sobrescreve
+    [polygon.id]: { address: "0x000cba", name: "(PoS) Tether USD" },
+  },
+} as const satisfies CustomContract;
 ```
 
 ### ContractDict type
 
-```typescript
+Contract Dict is type definition for custom contracts, allowing to pass the chainId as a property, that will be a number, and is acessable dynamicly!
 
+```typescript
 type ContractDict = {
   id: string;
   name: string;
-  chains: {
+  chainsAddress: {
     [key: number]: { address: Address }; //chain
   };
 } & (
@@ -127,6 +107,13 @@ type chain = {
   address: Address;
     ... // any information you want
 };
+
+```
+
+### Example
+
+```typescript
+customTokenERC20asConst.chainsAddress[mainnet.id].address
 ```
 
 ### Network extended example
@@ -136,7 +123,7 @@ export const mainnet = {
   ...wagmiMainnet,
   tokens: {
     eth: new Token({
-      ...eth,
+      ...eth, // this guys are the base of the token, only having a few properties
       isNative: true,
     }),
     usdt: new Token({
@@ -153,13 +140,31 @@ export const mainnet = {
     }),
     ...
   },
-} as const satisfies Chain & ChainAddition;
-    // from @wagmi/chains  & from your
+} as const satisfies ChainDict;
 
-export type TokensAddition = {
+// from @wagmi/chains & aditional infos, you can extends as much as you need
+type ChainDict = Chain & Tokens
+
+export type Tokens = {
   tokens: {
     [key: string]: Token;
   };
 };
+```
 
+## Usando custom Network com createClient do Wagmi
+
+Exemplo do Tokly
+```typescript
+const chains = supported_networks
+  .map((network) => network.wagmiRef!)
+  .filter(Boolean);
+
+// 2. Configure wagmi client
+const { provider } = configureChains(chains, [w3mProvider({ projectId })]);
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: w3mConnectors({ chains, version: 1, projectId }),
+  provider,
+});
 ```
