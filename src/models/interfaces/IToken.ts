@@ -1,4 +1,4 @@
-import Address from "../types/Address";
+import { Address } from "viem";
 import { ITokenBase } from "./ITokenBase";
 
 export default interface IToken extends ITokenBase {

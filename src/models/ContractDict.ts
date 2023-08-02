@@ -4,13 +4,12 @@ type chain = {
   address: Address;
   id?: string;
   name?: string;
-  symbol?: string;
 };
 
 export type ContractDict = {
   id: string; // identificador
   name: string; // nome legível
-  chains: {
+  chainsAddress: {
     [key: number]: chain;
     // por padrão pega os dados acima, mas se passar aqui sobrescreve
   };

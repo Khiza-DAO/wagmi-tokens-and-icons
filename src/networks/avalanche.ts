@@ -1,4 +1,4 @@
-import { TokensAddition } from "./types";
+import { ChainDict } from "./types";
 import {
   usdt,
   usdc,
@@ -12,7 +12,7 @@ import {
   frax,
   weth,
 } from "../tokens";
-import { avalanche as avalancheWagmiRef, Chain } from "@wagmi/chains";
+import { avalanche as avalancheWagmiRef } from "@wagmi/chains";
 import Token from "../models/Token";
 // import avalancheIcon from "@/icons/colored/chains/avalanche.svg";
 
@@ -67,6 +67,6 @@ export const avalanche = {
       address: "0x1C20E891Bab6b1727d14Da358FAe2984Ed9B59EB",
     }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default avalanche;

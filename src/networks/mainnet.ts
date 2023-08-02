@@ -1,4 +1,4 @@
-import { mainnet as wagmiRef, Chain } from "@wagmi/chains";
+import { mainnet as wagmiRef } from "@wagmi/chains";
 import {
   bnb,
   busd,
@@ -15,7 +15,7 @@ import {
   weth,
 } from "../tokens";
 import Token from "../models/Token";
-import { TokensAddition } from "./types";
+import { ChainDict } from "./types";
 
 export const mainnet = {
   ...wagmiRef,
@@ -73,6 +73,6 @@ export const mainnet = {
       address: "0x853d955aCEf822Db058eb8505911ED77F175b99e",
     }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default mainnet;

@@ -1,12 +1,14 @@
-import { Address } from "viem";
+import { Chain } from "@wagmi/chains";
 import Token from "../models/Token";
 
-export type customContract = {
-  address: Address;
+export type Icon = {
+  icon: string;
 };
 
-export type TokensAddition = {
+export type Tokens = {
   tokens: {
     [key: string]: Token;
   };
 };
+
+export type ChainDict = Chain & Tokens

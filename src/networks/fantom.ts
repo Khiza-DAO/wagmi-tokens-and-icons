@@ -1,7 +1,6 @@
-import { Chain } from "viem";
 import { usdt, usdc, link, dai, ftm, wbtc, frax, weth } from "../tokens";
 import { fantom as fantomWagmiRef } from "@wagmi/chains";
-import { TokensAddition } from "./types";
+import { ChainDict } from "./types";
 import Token from "../models/Token";
 // import fantomIcon from "@/icons/colored/chains/fantom.svg";
 
@@ -44,6 +43,6 @@ export const fantom = {
     //   address: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
     // }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default fantom;

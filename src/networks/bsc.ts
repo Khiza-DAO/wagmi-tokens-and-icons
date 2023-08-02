@@ -1,4 +1,4 @@
-import { TokensAddition } from "./types";
+import { ChainDict } from "./types";
 import {
   usdt,
   usdc,
@@ -85,6 +85,6 @@ export const bsc = {
       address: "0x1ce0c2827e2ef14d5c4f29a091d735a204794041",
     }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default bsc;

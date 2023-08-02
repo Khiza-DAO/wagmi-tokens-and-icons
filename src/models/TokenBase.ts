@@ -1,10 +1,10 @@
-import { ITokenBase, TokenSymbols } from "./interfaces/ITokenBase";
+import { ITokenBase } from "./interfaces/ITokenBase";
 
 export default class TokenBase implements ITokenBase {
   name: string;
   icon: string;
   decimals: number;
-  symbol: TokenSymbols;
+  symbol: string;
   note?: string;
 
   constructor({ decimals, icon, name, symbol, note }: ITokenBase) {

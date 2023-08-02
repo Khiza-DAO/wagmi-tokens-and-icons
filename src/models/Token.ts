@@ -1,4 +1,4 @@
-import Address from "./types/Address";
+import { Address } from "viem";
 import TokenBase from "./TokenBase";
 import IToken from "./interfaces/IToken";
 import { zeroAddress } from "viem";
@@ -31,7 +31,7 @@ export default class Token extends TokenBase implements IToken {
   }
 
   get address() {
-    return this.isNative ? zeroAddress : this._address
+    return this.isNative ? zeroAddress : this._address;
   }
 
   set address(v: Address | undefined) {

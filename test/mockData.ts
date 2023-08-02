@@ -1,6 +1,6 @@
 import { ContractDict } from "../src/models/ContractDict";
 import mainnet from "../src/networks/mainnet";
-import polygon from '../src/networks/polygon';
+import polygon from "../src/networks/polygon";
 
 export const tokenERC20 = {
   id: "abc",
@@ -8,7 +8,7 @@ export const tokenERC20 = {
   symbol: "abc",
   type: "ERC20",
   icon: "",
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -20,7 +20,7 @@ export const tokenERC721 = {
   symbol: "abc",
   type: "ERC721",
   png: "",
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -31,7 +31,7 @@ export const tokenCustom = {
   name: "abc",
   type: "custom",
   abi: [],
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -43,7 +43,7 @@ export const tokenERC20asConst = {
   symbol: "abc",
   type: "ERC20",
   icon: "",
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -55,7 +55,7 @@ export const tokenERC721asConst = {
   symbol: "abc",
   type: "ERC721",
   png: "",
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -66,7 +66,7 @@ export const tokenCustomAsConst = {
   name: "abc",
   type: "custom",
   abi: [],
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -76,7 +76,7 @@ export const wrongTokenERC20 = {
   id: "abc",
   name: "abc",
   type: "ERC20",
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -87,7 +87,7 @@ export const wrongTokenERC721 = {
   name: "abc",
   type: "ERC721",
   abi: [],
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },
@@ -98,7 +98,7 @@ export const wrongTokenCustom = {
   name: "abc",
   type: "custom",
   symbol: "ABC",
-  chains: {
+  chainsAddress: {
     [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
     [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
   },

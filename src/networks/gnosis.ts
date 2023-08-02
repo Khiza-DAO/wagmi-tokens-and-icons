@@ -1,6 +1,6 @@
 import { usdt, usdc, link, dai, wbtc, busd, uni, xdai, weth } from "../tokens";
-import { Chain, gnosis as gnosisWagmiRef } from "@wagmi/chains";
-import { TokensAddition } from "./types";
+import { gnosis as gnosisWagmiRef } from "@wagmi/chains";
+import { ChainDict } from "./types";
 import Token from "../models/Token";
 // import gnosisIcon from "@/icons/colored/chains/gnosis.svg";
 
@@ -46,6 +46,6 @@ export const gnosis = {
     //   address: "0xe2e73a1c69ecf83f464efce6a5be353a37ca09b2",
     // }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default gnosis;

@@ -1,4 +1,4 @@
-import { TokensAddition } from "./types";
+import { ChainDict } from "./types";
 import {
   usdt,
   usdc,
@@ -11,7 +11,7 @@ import {
   matic,
   frax,
 } from "../tokens";
-import { optimism as optimismWagmiRef, Chain } from "@wagmi/chains";
+import { optimism as optimismWagmiRef } from "@wagmi/chains";
 import Token from "../models/Token";
 // import optimismIcon from "@/icons/colored/chains/optimism.svg";
 
@@ -61,6 +61,6 @@ export const optimism = {
       address: "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
     }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default optimism;

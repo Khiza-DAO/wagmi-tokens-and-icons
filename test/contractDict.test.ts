@@ -1,4 +1,3 @@
-import { expectTypeOf } from "vitest";
 import { avalanche, mainnet } from "../src/networks";
 import {
   tokenCustom,
@@ -14,26 +13,26 @@ describe("tokenERC20:", () => {
     expect(tokenERC20asConst).toEqual(tokenERC20);
   });
 
-  test("-> tokenERC20asConst.chains[1].address            => '0xC02a...56Cc2'", () => {
-    expect(tokenERC20asConst.chains[1].address).toContain(
+  test("-> tokenERC20asConst.chainsAddress[1].address            => '0xC02a...56Cc2'", () => {
+    expect(tokenERC20asConst.chainsAddress[1].address).toContain(
       "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     );
   });
 
-  test("-> tokenERC20asConst.chains[mainnet.id = 1]       => {address:'0xC02a...56Cc2'}", () => {
-    expect(tokenERC20asConst.chains[mainnet.id]).toContain({
+  test("-> tokenERC20asConst.chainsAddress[mainnet.id = 1]       => {address:'0xC02a...56Cc2'}", () => {
+    expect(tokenERC20asConst.chainsAddress[mainnet.id]).toContain({
       address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
     });
   });
 
-  test("-> tokenERC20asConst.chains[mainnet.id = 1].address => '0xC02a...56Cc2'", () => {
-    expect(tokenERC20asConst.chains[mainnet.id].address).toContain(
+  test("-> tokenERC20asConst.chainsAddress[mainnet.id = 1].address => '0xC02a...56Cc2'", () => {
+    expect(tokenERC20asConst.chainsAddress[mainnet.id].address).toContain(
       "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     );
   });
 
-  test("-> tokenERC20asConst.chains[avalanche.id = ?]     => undefined", () => {
-    expect(tokenERC20asConst.chains[avalanche.id]).toBeUndefined();
+  test("-> tokenERC20asConst.chainsAddress[avalanche.id = ?]     => undefined", () => {
+    expect(tokenERC20asConst.chainsAddress[avalanche.id]).toBeUndefined();
   });
 });
 
@@ -42,26 +41,26 @@ describe("tokenERC721:", () => {
     expect(tokenERC721asConst).toEqual(tokenERC721);
   });
 
-  test("-> tokenERC721asConst.chains[1].address            => '0xC02a...56Cc2'", () => {
-    expect(tokenERC721asConst.chains[1].address).toContain(
+  test("-> tokenERC721asConst.chainsAddress[1].address            => '0xC02a...56Cc2'", () => {
+    expect(tokenERC721asConst.chainsAddress[1].address).toContain(
       "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     );
   });
 
-  test("-> tokenERC721asConst.chains[mainnet.id = 1]       => {address:'0xC02a...56Cc2'}", () => {
-    expect(tokenERC721asConst.chains[mainnet.id]).toContain({
+  test("-> tokenERC721asConst.chainsAddress[mainnet.id = 1]       => {address:'0xC02a...56Cc2'}", () => {
+    expect(tokenERC721asConst.chainsAddress[mainnet.id]).toContain({
       address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
     });
   });
 
-  test("-> tokenERC721asConst.chains[mainnet.id = 1].address => '0xC02a...56Cc2'", () => {
-    expect(tokenERC721asConst.chains[mainnet.id].address).toContain(
+  test("-> tokenERC721asConst.chainsAddress[mainnet.id = 1].address => '0xC02a...56Cc2'", () => {
+    expect(tokenERC721asConst.chainsAddress[mainnet.id].address).toContain(
       "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     );
   });
 
-  test("-> tokenERC721asConst.chains[avalanche.id = ?]     => undefined", () => {
-    expect(tokenERC721asConst.chains[avalanche.id]).toBeUndefined();
+  test("-> tokenERC721asConst.chainsAddress[avalanche.id = ?]     => undefined", () => {
+    expect(tokenERC721asConst.chainsAddress[avalanche.id]).toBeUndefined();
   });
 });
 
@@ -70,25 +69,25 @@ describe("tokenCustom", () => {
     expect(tokenCustomAsConst).toEqual(tokenCustom);
   });
 
-  test("->.chains[1].address            => '0xC02a...56Cc2'", () => {
-    expect(tokenCustomAsConst.chains[1].address).toContain(
+  test("->.chainsAddress[1].address            => '0xC02a...56Cc2'", () => {
+    expect(tokenCustomAsConst.chainsAddress[1].address).toContain(
       "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     );
   });
 
-  test("->.chains[mainnet.id = 1]       => {address:'0xC02a...56Cc2'}", () => {
-    expect(tokenCustomAsConst.chains[mainnet.id]).toContain({
+  test("->.chainsAddress[mainnet.id = 1]       => {address:'0xC02a...56Cc2'}", () => {
+    expect(tokenCustomAsConst.chainsAddress[mainnet.id]).toContain({
       address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
     });
   });
 
-  test("->.chains[mainnet.id = 1].address => '0xC02a...56Cc2'", () => {
-    expect(tokenCustomAsConst.chains[mainnet.id].address).toContain(
+  test("->.chainsAddress[mainnet.id = 1].address => '0xC02a...56Cc2'", () => {
+    expect(tokenCustomAsConst.chainsAddress[mainnet.id].address).toContain(
       "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     );
   });
 
-  test("->.chains[avalanche.id = ?]     => undefined", () => {
-    expect(tokenCustomAsConst.chains[avalanche.id]).toBeUndefined();
+  test("->.chainsAddress[avalanche.id = ?]     => undefined", () => {
+    expect(tokenCustomAsConst.chainsAddress[avalanche.id]).toBeUndefined();
   });
 });

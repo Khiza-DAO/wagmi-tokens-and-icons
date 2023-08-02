@@ -1,6 +1,6 @@
-import { TokensAddition } from "./types";
+import { ChainDict } from "./types";
 import { usdt, usdc, wbtc, dai, tusd, frax, eth, weth } from "../tokens";
-import { arbitrum as arbitrumWagmiRef, Chain } from "@wagmi/chains";
+import { arbitrum as arbitrumWagmiRef } from "@wagmi/chains";
 import Token from "../models/Token";
 // import arbitrumIcon from "@/icons/colored/chains/arbitrum.svg";
 
@@ -55,6 +55,6 @@ export const arbitrum = {
       address: "0x4D15a3A2286D883AF0AA1B3f21367843FAc63E07",
     }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default arbitrum;

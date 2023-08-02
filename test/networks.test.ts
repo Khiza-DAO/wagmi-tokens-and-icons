@@ -15,14 +15,14 @@ import {
   bsc,
   fantom,
   gnosis,
+  ChainDict,
 } from "../src/networks";
 import Token from "../src/models/Token";
-import { TokensAddition } from "../src/networks/types";
 import { Chain } from "@wagmi/chains";
 import _ from "lodash";
 
 type testSample = {
-  dict: Chain & TokensAddition;
+  dict: ChainDict;
   wagmi: Chain;
   expected: boolean | string;
 };

@@ -1,7 +1,7 @@
 import { usdt, usdc, dai, wbtc, busd, matic, frax, weth } from "../tokens";
-import { polygon as polygonWagmiRef, Chain } from "@wagmi/chains";
+import { polygon as polygonWagmiRef } from "@wagmi/chains";
 // import polygonIcon from "@/icons/colored/chains/polygon.svg";
-import { TokensAddition } from "./types";
+import { ChainDict } from "./types";
 import Token from "../models/Token";
 
 export const polygon = {
@@ -45,6 +45,6 @@ export const polygon = {
       address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
     }),
   },
-} as const satisfies Chain & TokensAddition;
+} as const satisfies ChainDict;
 
 export default polygon;
