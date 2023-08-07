@@ -41,4 +41,9 @@ export default class Token extends TokenBase implements IToken {
 
     this._address = v;
   }
+
+  setNewAddress(address: Address) {
+    this.address = address;
+    return new Token({ ...this, address: address });
+  }
 }

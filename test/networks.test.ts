@@ -27,10 +27,6 @@ type testSample = {
   expected: boolean | string;
 };
 
-type tokensSample = {
-  token: Token;
-};
-
 const testCases = [
   { dict: mainnet, wagmi: mainnetWagmi, expected: true },
   { dict: polygon, wagmi: polygonWagmi, expected: true },
