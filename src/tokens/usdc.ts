@@ -1,9 +1,8 @@
-import TokenBase from "../models/TokenBase";
 import usdcIcon from "../svgs/tokens/usdc.svg";
 
-export const usdc = new TokenBase({
+export const usdc = {
   decimals: 6,
   symbol: "USDC",
   name: "USD Coin",
   icon: "usdcIcon",
-});
+} as const;

@@ -1,9 +1,7 @@
-import TokenBase from "../models/TokenBase";
-
-export const xdai = new TokenBase({
+export const xdai = {
   decimals: 18,
   symbol: "XDAI",
   name: "xDAI",
   // este ícone não funciona
   icon: "gnosisIcon",
-});
+} as const;

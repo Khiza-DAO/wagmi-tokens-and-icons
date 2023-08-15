@@ -1,9 +1,8 @@
-import TokenBase from "../models/TokenBase";
 import usdpIcon from "../svgs/tokens/usdp.svg";
 
-export const usdp = new TokenBase({
+export const usdp = {
   decimals: 18,
   symbol: "USDP",
   name: "PAX Dollar",
   icon: "usdpIcon",
-});
+} as const;

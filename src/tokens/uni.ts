@@ -1,9 +1,8 @@
-import TokenBase from "../models/TokenBase";
 import uniIcon from "../svgs/tokens/uni.svg";
 
-export const uni = new TokenBase({
+export const uni = {
   decimals: 18,
   symbol: "UNI",
   name: "Uniswap",
   icon: "uniIcon",
-});
+} as const;
