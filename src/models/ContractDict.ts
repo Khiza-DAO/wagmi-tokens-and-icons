@@ -1,36 +1,47 @@
 import { Address } from "viem";
-import Token from "./Token";
 
-// type token = {
-//   address: Address;
-//   id?: string;
-//   name?: string;
-//   symbol?: string;
-//   png?: string;
-//   icon?: string;
-// };
+// [TODO] como armazenar endereços de carteiras (não contratos) conhecidas?
+export type KnownContractKey = string;
+export type ContractType = "ERC20" | "ERC721" | "custom";
 
-export type ContractDict = {
-  id: string; // identifier
-  name: string; // readable name
-  chainsAddress: {
-    [key: number]: Token;
+export type TokenContract = {
+  id: KnownContractKey; // identificador interno do projeto (usado pelo usuário do pacote)
+  address?: Address;
+  name: string; // label legível para o usuário final
+  symbol: string; // label legível para o usuário final
+  type: "ERC20" | "ERC721";
+  abi?: readonly any[];
+};
+
+export type CustomContract = {
+  id: KnownContractKey; // identificador interno do projeto (usado pelo usuário do pacote)
+  address?: Address;
+  name?: string;
+  symbol?: string;
+  type: "custom";
+  abi: readonly any[];
+};
+
+export type KnownContract = TokenContract | CustomContract;
+export type KnownContractReturn = KnownContract &
+  Required<Pick<KnownContract, "abi">>;
+
+export type StopRecursion = "id" | "type";
+export type NestedKnownContract = Partial<Omit<KnownContract, StopRecursion>> &
+  Required<Pick<KnownContract, "address">>;
+export type RootKnownContract = KnownContract;
+export type ChainKey = number;
+
+export type ContractDict = RootKnownContract & {
+  chains: {
+    [key: ChainKey]: NestedKnownContract;
   };
-} & (
-  | ({
-      symbol: string; // readable symbol (only for tokens and NFTs)
-    } & (
-      | {
-          type: "ERC20"; // ERC20 (tokens), ERC721 (NFTs) or custom
-          icon: string;
-        }
-      | {
-          type: "ERC721"; // ERC20 (tokens), ERC721 (NFTs) or custom
-          png: string;
-        }
-    ))
-  | {
-      type: "custom"; // ERC20 (tokens), ERC721 (NFTs) or custom
-      abi: readonly object[]; // ONLY custom
-    }
-);
+};
+
+export type KnownContracts = {
+  [key: string]: ContractDict;
+};
+
+export type ContractDictConfig = {
+  knownContracts?: ContractDict[];
+};

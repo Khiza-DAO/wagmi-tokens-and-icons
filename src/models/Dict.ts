@@ -1,22 +1,59 @@
 import _ from "lodash";
-import { ContractDict } from "./ContractDict";
+import {
+  ChainKey,
+  ContractDict,
+  ContractDictConfig,
+  ContractType,
+  KnownContractKey,
+  KnownContractReturn,
+  KnownContracts,
+} from "./ContractDict";
+import { erc20ABI, erc721ABI } from "../assets/ERCabi";
 
-export class Dict {
-  list: ContractDict[] = [];
+export class KhizaContractDict {
+  private knownContracts: KnownContracts = {};
+  private selectedChain: ChainKey = 1;
+  private defaultAbi: Record<ContractType, readonly any[]> = {
+    ERC20: erc20ABI,
+    ERC721: erc721ABI,
+    custom: [],
+  };
 
-  constructor() {
-    this.list;
+  constructor(config: ContractDictConfig) {
+    for (const contract of config.knownContracts || []) {
+      this.addContract(contract.id, contract);
+    }
   }
 
-  public add(ContractDict: ContractDict | ContractDict[]) {
-    this.list.push(
-      ...(_.isArray(ContractDict) ? ContractDict : [ContractDict])
-    );
+  addContract(id: string, contract: ContractDict) {
+    this.knownContracts[id] = contract;
   }
 
-  public filterById(id: ContractDict["id"]) {
-    return this.list.find((ContractDict) => {
-      return ContractDict.id === id;
-    });
+  setChain(chain: ChainKey) {
+    this.selectedChain = chain;
+  }
+
+  getContract(id: KnownContractKey): KnownContractReturn | null {
+    const rootContract = this.knownContracts[id];
+    if (!rootContract) {
+      return null;
+    }
+
+    const chain = rootContract.chains[this.selectedChain] || {};
+
+    const ret = {
+      ...rootContract,
+      ...chain,
+    };
+
+    const abi = ret.abi || this.defaultAbi[ret.type];
+    if (!abi.length) {
+      throw new Error(`ABI is required for custom contracts. ID: ${id}`);
+    }
+
+    return {
+      ...ret,
+      abi,
+    };
   }
 }
