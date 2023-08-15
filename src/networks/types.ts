@@ -1,5 +1,5 @@
 import { Chain } from "@wagmi/chains";
-import Token from "../models/Token";
+import IToken from "../models/interfaces/IToken";
 
 export type Icon = {
   icon: string;
@@ -7,8 +7,8 @@ export type Icon = {
 
 export type Tokens = {
   tokens: {
-    [key: string]: Token;
+    [key: string]: IToken;
   };
 };
 
-export type ChainDict = Chain & Tokens
+export type ChainDict = Chain & Tokens;
