@@ -27,16 +27,6 @@ type CustomContract = {
 type KnownContract = TokenContract | CustomContract
 type KnownContractReturn = KnownContract & Required<Pick<KnownContract, 'abi'>>
 
-// teste
-const a: KnownContractReturn = {
-    type: "ERC20",
-    id: '',
-    address: '0x00',
-    name: '',
-    symbol: '',
-    abi: [1],
-}
-
 type StopRecursion = 'id' | 'type'
 type NestedKnownContract = Partial<Omit<KnownContract, StopRecursion>> & Required<Pick<KnownContract, 'address'>>
 type RootKnownContract = KnownContract
@@ -61,8 +51,8 @@ class KhizaContractDict {
     private knownContracts: KnownContracts = {};
     private selectedChain: ChainKey;
     private defaultAbi: Record<ContractType, any[]> = {
-        'ERC20': [],
-        'ERC721': [],
+        'ERC20': [/* [TODO] colocar abi do erc20 aqui */],
+        'ERC721': [/* [TODO] colocar abi do erc721 aqui */],
         'custom': [],
     };
 
