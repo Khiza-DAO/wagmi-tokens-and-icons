@@ -4,30 +4,42 @@ import { Address } from "viem";
 
 // [TODO] como armazenar endereços de carteiras (não contratos) conhecidas?
 type KnownContractKey = string
+type ContractType = 'ERC20' | 'ERC721' | 'custom'
 
 type TokenContract = {
     id: KnownContractKey;   // identificador interno do projeto (usado pelo usuário do pacote)
-    address: Address;
+    address?: Address;
     name: string;           // label legível para o usuário final
     symbol: string;         // label legível para o usuário final
     type: 'ERC20' | 'ERC721';
+    abi?: any[];
 }
 
 type CustomContract = {
     id: KnownContractKey;   // identificador interno do projeto (usado pelo usuário do pacote)
-    address: Address;
+    address?: Address;
     name?: string;
     symbol?: string;
     type: 'custom';
-    abi: any;
-    // abi: any[];
+    abi: any[];
 }
 
 type KnownContract = TokenContract | CustomContract
+type KnownContractReturn = KnownContract & Required<Pick<KnownContract, 'abi'>>
+
+// teste
+const a: KnownContractReturn = {
+    type: "ERC20",
+    id: '',
+    address: '0x00',
+    name: '',
+    symbol: '',
+    abi: [1],
+}
 
 type StopRecursion = 'id' | 'type'
-type NestedKnownContract = Partial<Omit<KnownContract, StopRecursion>> & Pick<KnownContract, 'address'>
-type RootKnownContract = Omit<KnownContract, 'address'>
+type NestedKnownContract = Partial<Omit<KnownContract, StopRecursion>> & Required<Pick<KnownContract, 'address'>>
+type RootKnownContract = KnownContract
 type ChainKey = number
 
 type ContractDict = RootKnownContract & {
@@ -48,6 +60,11 @@ type ContractDictConfig = {
 class KhizaContractDict {
     private knownContracts: KnownContracts = {};
     private selectedChain: ChainKey;
+    private defaultAbi: Record<ContractType, any[]> = {
+        'ERC20': [],
+        'ERC721': [],
+        'custom': [],
+    };
 
     constructor(config: ContractDictConfig) {
         for (const contract of config.knownContracts || []) {
@@ -63,7 +80,7 @@ class KhizaContractDict {
         this.selectedChain = chain;
     }
 
-    getContract(id: KnownContractKey): KnownContract | null {
+    getContract(id: KnownContractKey): KnownContractReturn | null {
         const rootContract = this.knownContracts[id];
         if (!rootContract) {
             return null;
@@ -71,10 +88,20 @@ class KhizaContractDict {
 
         const chain = rootContract.chains[this.selectedChain] || {};
 
-        return {
+        const ret = {
             ...rootContract,
             ...chain,
         }
+
+        const abi = ret.abi || this.defaultAbi[ret.type];
+        if (!abi.length) {
+            throw new Error(`ABI is required for custom contracts. ID: ${id}`)
+        }
+
+        return {
+            ...ret,
+            abi,
+        };
     }
 }
 
@@ -84,8 +111,8 @@ import { bsc, mainnet, polygon } from "@wagmi/chains";
 
 const usdcDef: ContractDict = {
     id: 'usdc',
-    // name: 'USD Coin',
-    // symbol: 'USDC',
+    name: 'USD Coin',
+    symbol: 'USDC',
     type: 'ERC20',
     chains: {
         [mainnet.id]: {
