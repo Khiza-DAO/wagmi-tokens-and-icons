@@ -67,5 +67,3 @@ export const avalanche = {
     },
   },
 } as const satisfies ChainDict;
-
-export default avalanche;
