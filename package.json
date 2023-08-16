@@ -1,5 +1,5 @@
 {
-  "name": "wagmi-tokens-and-icons",
+  "name": "@khizadao/chain-dictionary",
   "version": "1.0.0",
   "description": "Token Contract and Icons for Wagmi networks",
   "main": "./dist/index.js",
@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "@wagmi/chains": "^1.6.0",
-    "lodash": "^4.17.21",
     "viem": "^1.3.0"
   }
 }

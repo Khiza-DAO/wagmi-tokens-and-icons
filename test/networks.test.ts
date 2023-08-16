@@ -30,7 +30,6 @@ import {
   polygonMumbai,
 } from "../src/networks";
 import { Chain } from "@wagmi/chains";
-import _ from "lodash";
 
 type testSample = {
   dict: ChainDict;
@@ -65,12 +64,6 @@ describe("Networks automated tests", () => {
       test(`-> wagmi's ${dict.name} NOT contain package  => ${expected}`, () => {
         expect(wagmi).not.toContain(dict);
       });
-
-      // test(`-> tokens in ${dict.name}.tokens are instanceof Token  => ${expected}`, () => {
-      //   _.values(dict.tokens).forEach((token) => {
-      //     expect(token).toBeInstanceOf(Token);
-      //   });
-      // });
     }
   );
 });

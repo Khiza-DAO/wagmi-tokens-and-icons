@@ -1,7 +1,6 @@
 import { mainnet, polygon } from "@wagmi/chains";
 import { ContractDict } from "../src/models/ContractDict";
 import { KhizaContractDict } from "../src/models/Dict";
-import _ from "lodash";
 import { erc20ABI, erc721ABI } from "../src/assets/ERCabi";
 
 describe("Dict class", () => {
