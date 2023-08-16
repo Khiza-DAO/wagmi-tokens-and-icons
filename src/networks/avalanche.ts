@@ -13,6 +13,7 @@ import {
   weth,
 } from "../tokens";
 import { avalanche as avalancheWagmiRef } from "@wagmi/chains";
+import { zeroAddress } from "../models";
 // import avalancheIcon from "@/icons/colored/chains/avalanche.svg";
 
 export const avalanche = {
@@ -21,6 +22,7 @@ export const avalanche = {
   tokens: {
     avax: {
       ...avax,
+      address: zeroAddress,
       isNative: true,
     },
     usdt: {

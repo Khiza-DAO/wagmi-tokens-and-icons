@@ -16,6 +16,7 @@ import {
   weth,
 } from "../tokens";
 import { bsc as bscWagmiRef, Chain } from "@wagmi/chains";
+import { zeroAddress } from "../models";
 // import bscIcon from "@/icons/colored/chains/bsc.svg";
 
 export const bsc = {
@@ -24,6 +25,7 @@ export const bsc = {
   tokens: {
     bnb: {
       ...bnb,
+      address: zeroAddress,
       isNative: true,
     },
     // Isso está estranho

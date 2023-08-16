@@ -1,6 +1,7 @@
 import { usdt, usdc, link, dai, ftm, wbtc, frax, weth } from "../tokens";
 import { fantom as fantomWagmiRef } from "@wagmi/chains";
 import { ChainDict } from "./types";
+import { zeroAddress } from "../models";
 // import fantomIcon from "@/icons/colored/chains/fantom.svg";
 
 export const fantom = {
@@ -9,6 +10,7 @@ export const fantom = {
   tokens: {
     ftm: {
       ...ftm,
+      address: zeroAddress,
       isNative: true,
     },
     usdt: {

@@ -2,12 +2,14 @@ import { usdt, usdc, dai, wbtc, busd, matic, frax, weth } from "../tokens";
 import { polygon as polygonWagmiRef } from "@wagmi/chains";
 // import polygonIcon from "@/icons/colored/chains/polygon.svg";
 import { ChainDict } from "./types";
+import { zeroAddress } from "../models";
 
 export const polygon = {
   ...polygonWagmiRef,
   tokens: {
     matic: {
       ...matic,
+      address: zeroAddress,
       // O endereço abaixo é apenas um precompile e não deve ser considerado o endereço de um token nativo
       // ref. https://stackoverflow.com/questions/74696804/native-coin-matic-has-a-contract-address-on-the-polygon-network
       isNative: true,

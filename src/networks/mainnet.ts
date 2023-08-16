@@ -15,12 +15,14 @@ import {
   weth,
 } from "../tokens";
 import { ChainDict } from "./types";
+import { zeroAddress } from "../models";
 
 export const mainnet = {
   ...wagmiRef,
   tokens: {
     eth: {
       ...eth,
+      address: zeroAddress,
       isNative: true,
     },
     weth: {

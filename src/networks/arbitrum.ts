@@ -1,6 +1,7 @@
 import { ChainDict } from "./types";
 import { usdt, usdc, wbtc, dai, tusd, frax, eth, weth } from "../tokens";
 import { arbitrum as arbitrumWagmiRef } from "@wagmi/chains";
+import { zeroAddress } from "../models";
 // import arbitrumIcon from "@/icons/colored/chains/arbitrum.svg";
 
 export const arbitrum = {
@@ -9,6 +10,7 @@ export const arbitrum = {
   tokens: {
     eth: {
       ...eth,
+      address: zeroAddress,
       isNative: true,
     },
     // Isso é o token de governança da Arbitrum e não seu token nativo

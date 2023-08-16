@@ -1,6 +1,7 @@
 import { usdt, usdc, link, dai, wbtc, busd, uni, xdai, weth } from "../tokens";
 import { gnosis as gnosisWagmiRef } from "@wagmi/chains";
 import { ChainDict } from "./types";
+import { zeroAddress } from "../models";
 // import gnosisIcon from "@/icons/colored/chains/gnosis.svg";
 
 export const gnosis = {
@@ -9,6 +10,7 @@ export const gnosis = {
   tokens: {
     xdai: {
       ...xdai,
+      address: zeroAddress,
       isNative: true,
     },
     dai: {
