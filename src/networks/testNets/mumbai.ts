@@ -1,7 +1,7 @@
-import { zeroAddress } from "viem";
 import { matic, usdc, usdt } from "../../tokens";
 import { polygonMumbai as mumbaiWagmiRef } from "@wagmi/chains";
 import { ChainDict } from "../types";
+import { zeroAddress } from "../../models";
 // import polygonIcon from '@/icons/colored/chains/polygon.svg'
 
 export const polygonMumbai = {

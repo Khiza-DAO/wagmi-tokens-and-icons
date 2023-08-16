@@ -1,4 +1,3 @@
-import { Address } from "viem";
 import { mainnet, avalanche, polygon } from "../src/networks";
 import {
   KnownContract,

@@ -1,6 +1,6 @@
 import { usdc, eth, weth } from "../../tokens/";
 import { goerli as goerliWagmiRef } from "@wagmi/chains";
-import { zeroAddress } from "viem";
+import { zeroAddress } from "../../models";
 import { ChainDict } from "../types";
 // import ethereumIcon from "@/icons/colored/chains/ethereum.svg";
 

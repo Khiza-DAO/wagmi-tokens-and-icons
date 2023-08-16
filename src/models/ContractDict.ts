@@ -1,4 +1,4 @@
-import { Address } from "viem";
+import { Address } from "./Address";
 
 // Represents the internal identifier of a known contract
 export type KnownContractKey = string;

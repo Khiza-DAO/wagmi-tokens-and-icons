@@ -1,7 +1,7 @@
 import { eth, usdc } from "../../tokens";
 import { optimismGoerli as optimismGoerliWagmiRef } from "@wagmi/chains";
-import { zeroAddress } from "viem";
 import { ChainDict } from "../types";
+import { zeroAddress } from "../../models";
 // import optimismIcon from "@/icons/colored/chains/optimism.svg";
 
 export const optimismGoerli = {

@@ -1,7 +1,7 @@
 import { avalancheFuji as avalancheFujiWagmiRef } from "@wagmi/chains";
 import { ChainDict } from "../types";
 import { avax, usdc } from "../../tokens";
-import { zeroAddress } from "viem";
+import { zeroAddress } from "../../models";
 // import avalancheIcon from "@/icons/colored/chains/avalanche.svg";
 
 export const avalancheFuji = {

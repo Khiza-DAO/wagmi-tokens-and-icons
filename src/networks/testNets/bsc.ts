@@ -1,7 +1,7 @@
 import { bscTestnet as bscTestnetWagmiRef } from "@wagmi/chains";
 import { ChainDict } from "../types";
 import { bnb, link, usdt } from "../../tokens";
-import { zeroAddress } from "viem";
+import { zeroAddress } from "../../models";
 // import bscIcon from "@/icons/colored/chains/bsc.svg";
 
 export const bscTestnet = {

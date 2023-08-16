@@ -1,7 +1,7 @@
 import { eth, usdc } from "../../tokens";
 import { sepolia as sepoliaWagmiRef } from "@wagmi/chains";
-import { zeroAddress } from "viem";
 import { ChainDict } from "../types";
+import { zeroAddress } from "../../models";
 // import ethereumIcon from "@/icons/colored/chains/ethereum.svg";
 
 export const sepolia = {
