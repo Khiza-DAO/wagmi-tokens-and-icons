@@ -5,10 +5,16 @@ export type Icon = {
   icon: string;
 };
 
+/**
+ * Represents a dictionary of tokens.
+ */
 export type Tokens = {
   tokens: {
     [key: string]: IToken;
   };
 };
 
+/**
+ * Represents a chain dictionary that combines both the Chain object and Tokens object.
+ */
 export type ChainDict = Chain & Tokens;
