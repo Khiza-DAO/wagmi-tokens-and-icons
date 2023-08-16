@@ -1,23 +1,12 @@
-# wagmi-tokens-and-icons
+# @khizadao/chain-dictionary
 
-This repository provide icons and popular token contacts for wagmi networks. Also provides types for adding those contract into a network and type for customContract
+This repository provide popular token contacts and token icons (in development) for wagmi networks. Also provides types for adding those contract into a network and type for customContract
 
-```typescript
-import { mainnet } from "@khizadao/chain-dictionary";
+## Problem found
 
-const ethIcon = mainnet.icon;
+Env file can be full of addresses of tokens from N networks. Allowing the dev to fall in a LOT of problems, and even when not using env, code could get realy messed up!
 
-const ethTokens = mainnet.tokens;
-
-// Como eu gostaria
-const usdtTokenEthNetwork = mainnet.tokens.usdt;
-```
-
-## Problema
-
-Ter que salvar em env/alguma outra forma endereços de contratos muito utilizados, permitindo confusões e erros.
-
-O env fica assim:
+Env example:
 
 ```
 MAINNET_CONTRACT_A_ADDRESS=0x000abc
@@ -27,247 +16,190 @@ POLYGON_CONTRACT_B_ADDRESS=0x000cba
 ...
 ```
 
-## Minha ideia
+## Using custom Networks in createClient from Wagmi
+
+Example using web3Modal:
 
 ```typescript
-import { mainnet, polygon } from "@khizadao/chain-dictionary";
+import {mainnet, polygon, ...} from '@khizadao/chain-directory'
 
-// Pegar as definições de uma rede através do seu id
-//const mainnet = dictionary.findByChainId(1)
-import { mainnet } from "@khizadao/chain-dictionary";
+const chains = [mainnet, polygon, ...]
 
-// Exemplo: pegar o endereço de um contrato a partir da instância da rede
-mainnet.tokens.usdc.address;
-
-// Exemplo: acessar propriedades do @wagmi/chains
-mainnet.blockExplorer.etherscan;
-
-// Exemplo: pegar chain e contrato a partir do seletor de rede
-(some kind of web3plugin).network.tokens.usdc.address;
-
-// Pega custom Contracts
-const myCustomContract = {
-  id: "abc",
-  name: "abc",
-  type: "custom", // can be "ERC20" or "ERC721", those have symbol property
-  abi: [], // abi is only for "custom"
-  // icon or png only with "ERC20" or "ERC721"
-  chainsAddress: {
-    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-  },
-} as const satisfies ContractDict;
-
-// Define um tipo para definições de contratos conhecidos
-const customContracts = {
-  id: "usdc", // identificador
-  name: "Circle USD", // nome legível
-  symbol: "USDC", // símbolo legível (somente para tokens e NFTs)
-  type: "ERC20", // ERC20 (tokens), ERC721 (NFTs) ou custom
-  //abi: [],  apenas custom
-  chainsAddress: {
-    [mainnet.id]: { address: "0x000cba" },
-    // por padrão pega os dados acima, mas se passar aqui sobrescreve
-    [polygon.id]: { address: "0x000cba", name: "(PoS) Tether USD" },
-  },
-} as const satisfies CustomContract;
-```
-
-### ContractDict type
-
-Contract Dict is type definition for custom contracts, allowing to pass the chainId as a property, that will be a number, and is acessable dynamicly!
-
-```typescript
-type ContractDict = {
-  id: string;
-  name: string;
-  chainsAddress: {
-    [key: number]: { address: Address }; //chain
-  };
-} & (
-  | ({
-      symbol: string;
-    } & (
-      | {
-          type: "ERC20";
-          icon: string;
-        }
-      | {
-          type: "ERC721";
-          png: string;
-        }
-    ))
-  | {
-      type: "custom";
-      abi: readonly object[];
-    }
-);
-
-type chain = {
-  address: Address;
-    ... // any information you want
-};
-
-```
-
-### Example
-
-```typescript
-customTokenERC20asConst.chainsAddress[mainnet.id].address;
-```
-
-### Network extended example
-
-```typescript
-export const mainnet = {
-  ...wagmiMainnet,
-  tokens: {
-    eth: new Token({
-      ...eth, // this guys are the base of the token, only having a few properties
-      isNative: true,
-    }),
-    usdt: new Token({
-      ...usdt,
-      address: "0xdac17f958d2ee523a2206206994597c13d831ec7",
-    }),
-    usdc: new Token({
-      ...usdc,
-      address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-    }),
-    matic: new Token({
-      ...matic,
-      address: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
-    }),
-    ...
-  },
-} as const satisfies ChainDict;
-
-// from @wagmi/chains & aditional infos, you can extends as much as you need
-type ChainDict = Chain & Tokens
-
-export type Tokens = {
-  tokens: {
-    [key: string]: Token;
-  };
-};
-```
-
-## Usando custom Network com createClient do Wagmi
-
-Exemplo do Tokly
-
-```typescript
-const chains = supported_networks
-  .map((network) => network.wagmiRef!)
-  .filter(Boolean);
-
-// 2. Configure wagmi client
 const { provider } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors: w3mConnectors({ chains, version: 1, projectId }),
+  connectors: w3mConnectors({ chains**, version: 1, projectId }),
   provider,
 });
 ```
 
-# Genie
+Note \*\*: w3mConnectors does not extends Chains like configureChains, so it will show an error saying that is not a type of Chain, but it contains the needed chain informations. For now @ts-ignore is the way
 
-# Documentation for ContractDict Type
+# KhizaContractDict
 
-The `ContractDict` type is a TypeScript type that provides a custom contract object with the addresses of the smart contract in different networks. It has the following properties:
+The `KhizaContractDict` class represents a contract dictionary that allows you to store and retrieve information about known contracts.
 
-1. **id** (string): An identifier that uniquely identifies the contract.
-2. **name** (string): A human-readable name for the contract.
-3. **chainsAddress** (object): An object that contains chain addresses for the contract. Each key in this object represents a network chain, and the corresponding value is an `Address` type.
-   - `Address` type: This is a custom type that represents a network address. You should define this type according to your particular use case.
+## Constructor
 
-In addition to the above properties, the `ContractDict` type also has the following conditional properties based on the contract type:
+- `constructor(config?: ContractDictConfig)`: The constructor for the `KhizaContractDict` class. It takes an optional `config` parameter which is an array of `ContractDict` objects. Each object in the `config` array represents a contract and its associated information. The `addContract` method is automatically called for each contract in the `config` array when the `KhizaContractDict` instance is created.
 
-1. **symbol** (string): A readable symbol for the contract. This property only exists if the contract is of type `ERC20` or `ERC721`.
-2. **type** (string): The type of the contract. It can be one of the following:
-   - `"ERC20"`: Indicates that the contract is an ERC20 token.
-   - `"ERC721"`: Indicates that the contract is an ERC721 non-fungible token (NFT).
-   - `"custom"`: Indicates that the contract is a custom contract.
-3. **icon** (string): An icon representing the contract. This property only exists if the contract is of type `ERC20` and has the `symbol` property.
-4. **png** (string): A PNG image representing the contract. This property only exists if the contract is of type `ERC721` and has the `symbol` property.
-5. **abi** (readonly object[]): An array of objects representing the Application Binary Interface (ABI) of the contract. This property only exists if the contract is of type `custom`.
+## Methods
 
-Please note that the `ContractDict` type provides a flexible structure for representing different types of contracts with their addresses in various networks. You can customize this type to suit your specific requirements by modifying or extending its properties and conditional logic.
+- `addContract(id: string, contract: ContractDict): void`: Adds a contract to the contract dictionary. It takes an `id` parameter of type `string` which represents the internal identifier of the contract, and a `contract` parameter of type `ContractDict` which represents the contract object to be added.
 
-Example usage:
+- `setChain(chain: ChainKey): void`: Sets the selected chain for retrieving contract information. It takes a `chain` parameter of type `ChainKey`, which is a number representing the key of the chain to select.
+
+- `getContract(id: KnownContractKey): KnownContractReturn | undefined`: Retrieves a known contract from the contract dictionary based on its identifier. It takes an `id` parameter of type `KnownContractKey` which represents the internal identifier of the contract. It returns a `KnownContractReturn` object if the contract is found, or `undefined` if the contract does not exist in the dictionary.
+
+## Properties
+
+- `knownContracts: KnownContracts`: A property that represents the collection of known contracts stored in the contract dictionary. It is an object where each contract is identified by a unique string key.
+
+- `selectedChain: ChainKey`: A property that represents the currently selected chain for retrieving contract information. It is a number representing the key of the selected chain.
+
+- `defaultAbi: Record<ContractType, readonly any[]>`: A property that holds the default ABI (Application Binary Interface) for each contract type. It is an object where the keys are the possible contract types ("ERC20", "ERC721", and "custom") and the values are arrays containing the default ABI for each contract type.
+
+## Example
 
 ```typescript
-const exampleContract = {
-  id: "abc123",
-  name: "Example Token",
+import { KhizaContractDict } from "your-module";
+
+const token1 = {
+  id: "1",
+  name: "Token One",
+  symbol: "TKN",
   type: "ERC20",
-  symbol: "ETK",
-  icon: "https://example.com/etk_icon.png",
-  chainsAddress: {
-    1: { address: "0xfedcba987654321D0A0e5C4F27eAD9083C756Cc2" }, // You may want to add more information to chain type, fell free
-    137: { address: "0xfedcba987654321D0A0e5C4F27eAD9083C756Cc2" }
+  chains: {
+    1: {
+      address: "0xabc123",
+    },
+    5: {
+      address: "0xabc321",
+    },
   },
 } as const satisfies ContractDict;
 
-
-type chain = {
-  address: Address;
-  id?: string;
-  name?: string;
-};
-
-export const tokenERC20asConst = {
-  id: "abc",
-  name: "abc",
-  symbol: "abc",
-  type: "ERC20",
-  icon: "",
-  chainsAddress: {
-    [mainnet.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-    [polygon.id]: { address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
+const token2 = {
+  id: "2",
+  name: "NFT Two",
+  symbol: "NFT",
+  type: "ERC721",
+  chains: {
+    1: {
+      address: "0xdef456",
+    },
+    5: {
+      address: "0xdef654",
+      name: "NFT Two Bridged",
+    },
   },
 } as const satisfies ContractDict;
+
+const config = [token1, token2];
+
+const contractDict = new KhizaContractDict(config);
+contractDict.setChain(mainnet.id); // 1
+
+const contract = contractDict.getContract("1");
+console.log(contract);
+// Expected output:
+// {
+//   id: "1",
+//   name: "Token",
+//   symbol: "TKN",
+//   type: "ERC20",
+//   abi: erc20ABI, //This will return a ABI in acording with the type
+//   address: "0xabc123"
+// }
+
+contractDict.setChain(5);
+
+const contract2 = contractDict.getContract("2");
+console.log(contract2);
+// Expected output:
+// {
+//   id: "2",
+//   name: "NFT Two Bridged",
+//   symbol: "NFT",
+//   type: "ERC721",
+//   abi: erc721ABI,
+//   address: "0xdef654"
+// }
 ```
 
-In this example, `exampleContract` represents an ERC20 contract with the symbol "ETK" and an icon located at "https://example.com/etk_icon.png". The contract has addresses for chain ids 1 and 137.
+In the above example, we create a `KhizaContractDict` instance with a `config` array containing two contract objects. We then retrieve the first contract using its identifier and print its details. After that, we set the selected chain to 2 and retrieve the second contract, printing its details.
 
-Feel free to modify this type according to your needs and use it as a reference for creating custom contract objects with their respective addresses in different networks.
+Please note that this is just a documentation example and you may have additional properties or use cases based on your specific implementation.
 
-# Documentation for ChainDict Type
+# ChainDict Documentation
 
-The `mainnet` object is a TypeScript constant that represents the mainnet network configuration. It is an extension of the `wagmiMainnet` object and includes additional token configurations under the `tokens` property. The `mainnet` object has the following structure:
+The `ChainDict` type represents a dictionary that combines the properties of the wagmi reference chain with additional token information. It is used to store information about various chains, including official networks and testnets.
+
+## Wagmi Properties
+
+- `Address`: Represents an Ethereum address in the format `0x{string}`.
+- `Chain`: Represents a chain configuration.
+  - `id: number`: The ID of the chain.
+  - `name: string`: The human-readable name of the chain.
+  - `network: string`: The internal network name of the chain.
+  - `nativeCurrency: NativeCurrency`: The currency used by the chain.
+    - `NativeCurrency`: Represents the native currency of a chain.
+      - `name: string`: The name of the currency.
+      - `symbol: string`: The symbol of the currency (2-6 characters long).
+      - `decimals: number`: The number of decimal places used to represent the currency value.
+  - `rpcUrls: object`: A collection of RPC endpoints for the chain.
+    - `RpcUrls`: Represents a collection of RPC URLs for a chain.
+      - `http: string[]`: An array of HTTP RPC URLs.
+      - `webSocket?: string[]`: (Optional) An array of WebSocket RPC URLs.
+  - `blockExplorers?: object`: (Optional) A collection of block explorers for the chain.
+    - `BlockExplorer`: Defines the name and URL of a block explorer.
+  - `contracts?: object`: (Optional) A collection of contracts for the chain.
+    - `Contract`: Represents a contract configuration.
+      - `address: Address`: The address of the contract.
+      - `blockCreated?: number`: (Optional) The block number at which the contract was created.
+  - `testnet?: boolean`: Flag indicating if the chain is a testnet.
+
+### Token Properties
+
+Each token property within the `tokens` object has the following structure:
+
+- `tokens`: An object containing information about tokens associated with the chain.
+  - `name: string`: The readable name of the token, used for display.
+  - `address: Address`: The address of the token. Type Address is as `0x${string}`.
+  - `symbol: string`: The symbol of the Token.
+  - `decimals: number`: The number of decimal places used to represent the token value.
+  - `maxSupply?: bigInt`: The max supply quantity available for the token.
+  - `isNative?: boolean`: Flag indicating if the token is native of the network.
+  - `note?: string`: Usefull information (ex: Bridged)
+
+## Usage Example
 
 ```typescript
-import { mainnet as wagmiMainnet } from "@wagmi/chains";
+import { matic, usdc, usdt } from "../../tokens";
+import { polygonMumbai as mumbaiWagmiRef } from "@wagmi/chains";
+import { ChainDict } from "../types";
+import { zeroAddress } from "../../models";
 
-const mainnet = {
-  ...wagmiMainnet,
+export const polygonMumbai = {
+  ...mumbaiWagmiRef, // This is a Chain type
   tokens: {
-    eth: new Token({ ... }),
-    usdt: new Token({ ... }),
-    usdc: new Token({ ... }),
-    matic: new Token({ ... }),
-    ...
+    matic: {
+      ...matic,
+      address: zeroAddress,
+      isNative: true,
+    },
+    usdc: {
+      ...usdc,
+      address: "0xE097d6B3100777DC31B34dC2c58fB524C2e76921",
+      decimals: 6,
+    },
+    usdt: {
+      ...usdt,
+      address: "0xA02f6adc7926efeBBd59Fd43A84f4E0c0c91e832",
+      decimals: 6,
+    },
   },
 } as const satisfies ChainDict;
 ```
 
-Here's a breakdown of the properties and types used in the `mainnet` object:
-
-1. **...wagmiMainnet**: This syntax spreads the properties from the `wagmiMainnet` object into the `mainnet` object.
-2. **tokens**: This property represents a collection of tokens on the mainnet network. Each token is defined as a key-value pair, where the key is the token symbol and the value is an instance of the `Token` class.
-   - **[key: string]**: This is an index signature that specifies that the keys of the `tokens` object can be any string.
-   - **Token**: This is a custom class defined elsewhere in the codebase. Please refer to the codebase for its implementation.
-
-Additionally, there are two type definitions used in this code snippet:
-
-1. **ChainDict**: This type is an intersection (`&`) of two other types: `Chain` and `Tokens`. It represents a dictionary of chains and their associated tokens.
-
-   - **Chain**: This type represents the configuration of a blockchain chain. Its properties and types are defined elsewhere in the codebase.
-   - **Tokens**: This type represents a collection of tokens. It has a property called `tokens`, which is an object with string keys and `Token` values.
-
-2. **Tokens**: This type is an interface that defines the structure of the `tokens` property in the `ChainDict` type. It is an object with string keys and `Token` values.
-
-Please note that the documentation provided above assumes that you have access to the full source code, including the definitions of the `wagmiMainnet` object, `Token` class, `Chain` type, and any other relevant dependencies. Make sure to replace the placeholder values and types with the actual values and types from your codebase.
-
-Feel free to extend and modify the `mainnet` object and the associated types (`ChainDict`, `Tokens`, etc.) according to your needs.
+In the above example, `polygonMumbai` is an instance of `ChainDict`. It includes the properties of the wagmi reference chain (`mumbaiWagmiRef`) and additional token information. The `tokens` object contains three tokens: `matic`, `usdc`, and `usdt`. Each token has an `address` and `decimals` property.
