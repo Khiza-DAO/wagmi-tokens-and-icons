@@ -10,7 +10,7 @@ export type Icon = {
  */
 export type Tokens = {
   tokens: {
-    [key: string]: IToken;
+    [key: string]: IToken & Required<Pick<IToken, 'address'>>;
   };
 };
 
