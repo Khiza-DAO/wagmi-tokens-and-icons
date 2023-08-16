@@ -1,5 +1,4 @@
-import mainnet from "../src/networks/mainnet";
-import polygon from "../src/networks/polygon";
+import { mainnet, polygon } from "../src/networks/";
 import { ContractDict } from "../src/models/ContractDict";
 
 export const tokenERC20 = {
@@ -23,7 +22,6 @@ export const tokenERC721 = {
   name: "abc",
   symbol: "abc",
   type: "ERC721",
-  png: "",
   chains: {
     [mainnet.id]: {
       address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
@@ -36,7 +34,6 @@ export const tokenERC721 = {
 
 export const tokenCustom = {
   id: "abc",
-  name: "abc",
   type: "custom",
   abi: [],
   chains: {

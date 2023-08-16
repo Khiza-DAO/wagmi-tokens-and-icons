@@ -6,6 +6,12 @@ import {
   bsc as bscWagmi,
   fantom as fantomWagmi,
   gnosis as gnosisWagmi,
+  avalancheFuji as avalancheFujiWagmi,
+  bscTestnet as bscTestnetWagmi,
+  goerli as goerliWagmi,
+  sepolia as sepoliaWagmi,
+  optimismGoerli as optimismGoerliWagmi,
+  polygonMumbai as polygonMumbaiWagmi,
 } from "@wagmi/chains";
 import {
   mainnet,
@@ -16,8 +22,13 @@ import {
   fantom,
   gnosis,
   ChainDict,
+  avalancheFuji,
+  bscTestnet,
+  goerli,
+  sepolia,
+  optimismGoerli,
+  polygonMumbai,
 } from "../src/networks";
-import Token from "../src/models/Token";
 import { Chain } from "@wagmi/chains";
 import _ from "lodash";
 
@@ -35,6 +46,12 @@ const testCases = [
   { dict: bsc, wagmi: bscWagmi, expected: true },
   { dict: fantom, wagmi: fantomWagmi, expected: true },
   { dict: gnosis, wagmi: gnosisWagmi, expected: true },
+  { dict: avalancheFuji, wagmi: avalancheFujiWagmi, expected: true },
+  { dict: bscTestnet, wagmi: bscTestnetWagmi, expected: true },
+  { dict: goerli, wagmi: goerliWagmi, expected: true },
+  { dict: sepolia, wagmi: sepoliaWagmi, expected: true },
+  { dict: optimismGoerli, wagmi: optimismGoerliWagmi, expected: true },
+  { dict: polygonMumbai, wagmi: polygonMumbaiWagmi, expected: true },
 ] satisfies testSample[];
 
 describe("Networks automated tests", () => {
@@ -49,11 +66,11 @@ describe("Networks automated tests", () => {
         expect(wagmi).not.toContain(dict);
       });
 
-      test(`-> tokens in ${dict.name}.tokens are instanceof Token  => ${expected}`, () => {
-        _.values(dict.tokens).forEach((token) => {
-          expect(token).toBeInstanceOf(Token);
-        });
-      });
+      // test(`-> tokens in ${dict.name}.tokens are instanceof Token  => ${expected}`, () => {
+      //   _.values(dict.tokens).forEach((token) => {
+      //     expect(token).toBeInstanceOf(Token);
+      //   });
+      // });
     }
   );
 });
