@@ -73,5 +73,3 @@ export const mainnet = {
     },
   },
 } as const satisfies ChainDict;
-
-export default mainnet;

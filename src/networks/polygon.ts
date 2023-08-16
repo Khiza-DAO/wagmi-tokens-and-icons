@@ -45,5 +45,3 @@ export const polygon = {
     },
   },
 } as const satisfies ChainDict;
-
-export default polygon;

@@ -45,5 +45,3 @@ export const fantom = {
     // },
   },
 } as const satisfies ChainDict;
-
-export default fantom;

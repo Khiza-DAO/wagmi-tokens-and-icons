@@ -85,5 +85,3 @@ export const bsc = {
     },
   },
 } as const satisfies ChainDict;
-
-export default bsc;

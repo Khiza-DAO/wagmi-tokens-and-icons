@@ -46,5 +46,3 @@ export const gnosis = {
     // },
   },
 } as const satisfies ChainDict;
-
-export default gnosis;

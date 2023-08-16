@@ -55,5 +55,3 @@ export const arbitrum = {
     },
   },
 } as const satisfies ChainDict;
-
-export default arbitrum;

@@ -61,5 +61,3 @@ export const optimism = {
     },
   },
 } as const satisfies ChainDict;
-
-export default optimism;
