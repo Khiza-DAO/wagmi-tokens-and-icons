@@ -5,5 +5,5 @@ export const avax = {
   symbol: "AVAX",
   name: "Avalanche",
   // precisa ser adicionada a icon lib
-  icon: "avaxIcon",
+  // icon: "avaxIcon",
 } as const;

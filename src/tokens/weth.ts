@@ -4,5 +4,5 @@ export const weth = {
   decimals: 18,
   symbol: "WETH",
   name: "Wrapped Ether",
-  icon: "ethIcon",
+  // icon: "ethIcon",
 } as const;

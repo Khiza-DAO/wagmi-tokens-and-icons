@@ -4,5 +4,5 @@ export const bnb = {
   decimals: 18,
   symbol: "BNB",
   name: "BNB",
-  icon: "bnbIcon",
+  // icon: "bnbIcon",
 } as const;

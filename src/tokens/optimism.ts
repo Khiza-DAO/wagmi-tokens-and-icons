@@ -4,5 +4,5 @@ export const op = {
   decimals: 18,
   symbol: "OP",
   name: "Optimism",
-  icon: "optimismIcon",
+  // icon: "optimismIcon",
 } as const;

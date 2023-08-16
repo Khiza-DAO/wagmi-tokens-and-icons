@@ -4,5 +4,5 @@ export const steth = {
   decimals: 18,
   symbol: "STETH",
   name: "Lido Stalked Ether",
-  icon: "stethIcon",
+  // icon: "stethIcon",
 } as const;

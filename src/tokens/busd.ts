@@ -4,5 +4,5 @@ export const busd = {
   decimals: 18,
   symbol: "BUSD",
   name: "Binance USD",
-  icon: "busdIcon",
+  // icon: "busdIcon",
 } as const;

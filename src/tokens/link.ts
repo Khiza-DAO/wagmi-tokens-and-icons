@@ -4,5 +4,5 @@ export const link = {
   decimals: 18,
   symbol: "LINK",
   name: "Chainlink",
-  icon: "linkIcon",
+  // icon: "linkIcon",
 } as const;

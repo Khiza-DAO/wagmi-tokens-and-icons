@@ -4,5 +4,5 @@ export const wbtc = {
   decimals: 18,
   symbol: "WBTC",
   name: "Wrapped Bitcoin",
-  icon: "wbtcIcon",
+  // icon: "wbtcIcon",
 } as const;

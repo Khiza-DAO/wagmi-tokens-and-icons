@@ -4,5 +4,5 @@ export const matic = {
   decimals: 18,
   symbol: "MATIC",
   name: "MATIC",
-  icon: "maticIcon",
+  // icon: "maticIcon",
 } as const;

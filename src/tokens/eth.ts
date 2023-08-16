@@ -4,5 +4,5 @@ export const eth = {
   decimals: 18,
   symbol: "ETH",
   name: "Ether",
-  icon: "ethIcon",
+  // icon: "ethIcon",
 } as const;

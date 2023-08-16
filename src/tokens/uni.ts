@@ -4,5 +4,5 @@ export const uni = {
   decimals: 18,
   symbol: "UNI",
   name: "Uniswap",
-  icon: "uniIcon",
+  // icon: "uniIcon",
 } as const;

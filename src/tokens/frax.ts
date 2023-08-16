@@ -4,5 +4,5 @@ export const frax = {
   decimals: 18,
   symbol: "FRAX",
   name: "Frax",
-  icon: "fraxIcon",
+  // icon: "fraxIcon",
 } as const;

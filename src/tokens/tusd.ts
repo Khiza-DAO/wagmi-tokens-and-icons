@@ -4,5 +4,5 @@ export const tusd = {
   decimals: 18,
   symbol: "TUSD",
   name: "True USD",
-  icon: "tusdIcon",
+  // icon: "tusdIcon",
 } as const;

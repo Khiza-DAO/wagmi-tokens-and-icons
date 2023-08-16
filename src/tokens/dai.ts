@@ -4,5 +4,5 @@ export const dai = {
   decimals: 18,
   symbol: "DAI",
   name: "DAI",
-  icon: "daiIcon",
+  // icon: "daiIcon",
 } as const;

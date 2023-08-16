@@ -4,5 +4,5 @@ export const ftm = {
   decimals: 18,
   symbol: "FTM",
   name: "Fantom",
-  icon: "ftmIcon",
+  // icon: "ftmIcon",
 } as const;

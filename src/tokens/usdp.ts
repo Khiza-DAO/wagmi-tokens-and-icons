@@ -4,5 +4,5 @@ export const usdp = {
   decimals: 18,
   symbol: "USDP",
   name: "PAX Dollar",
-  icon: "usdpIcon",
+  // icon: "usdpIcon",
 } as const;

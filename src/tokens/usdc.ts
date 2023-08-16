@@ -4,5 +4,5 @@ export const usdc = {
   decimals: 6,
   symbol: "USDC",
   name: "USD Coin",
-  icon: "usdcIcon",
+  // icon: "usdcIcon",
 } as const;
