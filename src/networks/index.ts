@@ -5,5 +5,6 @@ export * from "./fantom";
 export * from "./gnosis";
 export * from "./mainnet";
 export * from "./polygon";
+export * from "./optimism";
 export * from "./types";
 export * from "./testNets";
