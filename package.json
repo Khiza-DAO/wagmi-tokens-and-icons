@@ -2,9 +2,27 @@
   "name": "@khizadao/chain-dictionary",
   "version": "1.0.0",
   "description": "Token Contract and Icons for Wagmi networks",
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./chains": {
+      "types": "./dist/network/index.d.ts",
+      "default": "./dist/networks/index.js"
+    },
+    "./models": {
+      "types": "./dist/models/index.d.ts",
+      "default": "./dist/modelss/index.js"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "default": "./dist/tokenss/index.js"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "test": "vitest --watch --reporter verbose",
@@ -15,9 +33,9 @@
     "url": "git+ssh://git@github.com/Khiza-DAO/wagmi-tokens-and-icons.git"
   },
   "files": [
-    "./src",
-    "./dist",
-    "./README.md"
+    "/src",
+    "/dist",
+    "/README.md"
   ],
   "keywords": [
     "icons",
