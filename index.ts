@@ -1,5 +1,4 @@
 export {
-  KhizaContractDict,
   arbitrum,
   avalanche,
   avalancheFuji,
@@ -13,6 +12,7 @@ export {
   polygon,
   polygonMumbai,
   sepolia,
+  KhizaContractDict,
 } from "./src";
 
 export type {

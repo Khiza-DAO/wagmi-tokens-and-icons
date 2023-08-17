@@ -1,5 +1,4 @@
 export type {
-  KhizaContractDict,
   ContractDict,
   ContractDictConfig,
   ContractType,
@@ -14,6 +13,8 @@ export type {
   RootKnownContract,
   StopRecursion,
 } from "./models";
+
+export { KhizaContractDict } from "./models";
 
 export type { ChainDict } from "./networks";
 
