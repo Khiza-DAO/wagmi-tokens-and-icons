@@ -16,6 +16,46 @@ POLYGON_CONTRACT_B_ADDRESS=0x000cba
 ...
 ```
 
+## Ready to use
+
+- First, set your contracts.
+- Second, iniciate the KhizaContractDict instance passing the contracts inside an array.
+- Third, set the chain.
+- Done, dict is ready to use
+
+```typescript
+// Setting a token for the dict
+export const toklyRegistry = {
+  id: "toklyRegistry",
+  type: "custom",
+  abi: ToklyRegistry.abi,
+  chains: {
+    [mainnet.id]: { address: "0xABC43990662bAF390a5DB684b069e0B962A615689" },
+    [polygon.id]: { address: "0xDEFb4904c3CF17e4065057D9fcaf007b53878139" },
+    [goerli.id]: { address: "0xABC3990662bAF390a5DB684b069e0B962A615689" },
+    [polygonMumbai.id]: { address: "0xDEFb4904c3CF17e4065057D9fcaf007b53878139" }
+  },
+} as const satisfies ContractDict
+
+import { KhizaContractDict } from "@khizadao/chain-dictionary";
+
+// Iniciate KhizaContractDict
+export const dict = new KhizaContractDict([toklyRegistry]);
+
+// Set the chain
+dict.setChain(1) // Evm chain id for ethereum
+// OR
+import {mainnet} from "@khizadao/chain-dictionary"
+dict.setChain(mainnet.id) // 1
+
+// Using the dict
+const ToklyRegistryInCurrentNetwork = dict.getContract('toklyRegistry')
+
+console.log(ToklyRegistryInCurrentNetwork.address) // 0xABC43990662bAF390a5DB684b069e0B962A615689
+```
+
+Note: dict.setChain is recomanded to be used inside a watchNetwork (from wagmi), so whenever you call dict.getContract it will return the contract from that chain without needing to setChain every time.
+
 ## Using custom Networks in createClient from Wagmi
 
 Example using web3Modal:
@@ -44,19 +84,13 @@ The `KhizaContractDict` class represents a contract dictionary that allows you t
 - `constructor(config?: ContractDictConfig)`: The constructor for the `KhizaContractDict` class. It takes an optional `config` parameter which is an array of `ContractDict` objects. Each object in the `config` array represents a contract and its associated information. The `addContract` method is automatically called for each contract in the `config` array when the `KhizaContractDict` instance is created.
 
 ## Methods
-
 - `addContract(id: string, contract: ContractDict): void`: Adds a contract to the contract dictionary. It takes an `id` parameter of type `string` which represents the internal identifier of the contract, and a `contract` parameter of type `ContractDict` which represents the contract object to be added.
-
-- `setChain(chain: ChainKey): void`: Sets the selected chain for retrieving contract information. It takes a `chain` parameter of type `ChainKey`, which is a number representing the key of the chain to select.
-
+- `setChain(chain: ChainKey): void`: Sets the selected chain for retrieving contract information. It takes a `chain` parameter of type `ChainKey`, which is a number representing the key of the chain to select
 - `getContract(id: KnownContractKey): KnownContractReturn | undefined`: Retrieves a known contract from the contract dictionary based on its identifier. It takes an `id` parameter of type `KnownContractKey` which represents the internal identifier of the contract. It returns a `KnownContractReturn` object if the contract is found, or `undefined` if the contract does not exist in the dictionary.
 
 ## Properties
-
 - `knownContracts: KnownContracts`: A property that represents the collection of known contracts stored in the contract dictionary. It is an object where each contract is identified by a unique string key.
-
 - `selectedChain: ChainKey`: A property that represents the currently selected chain for retrieving contract information. It is a number representing the key of the selected chain.
-
 - `defaultAbi: Record<ContractType, readonly any[]>`: A property that holds the default ABI (Application Binary Interface) for each contract type. It is an object where the keys are the possible contract types ("ERC20", "ERC721", and "custom") and the values are arrays containing the default ABI for each contract type.
 
 ## Example
