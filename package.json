@@ -34,7 +34,6 @@
     "url": "git+ssh://git@github.com/Khiza-DAO/wagmi-tokens-and-icons.git"
   },
   "files": [
-    "/src",
     "/dist",
     "/src",
     "/package.json",
@@ -64,5 +63,8 @@
   },
   "dependencies": {
     "@wagmi/chains": "^1.6.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }
