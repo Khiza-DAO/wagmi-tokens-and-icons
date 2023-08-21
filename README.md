@@ -1,4 +1,4 @@
-# @khizadao/chain-dictionary
+# @khizadao/wagmi-dictionary
 
 This repository provide popular token contacts and token icons (in development) for wagmi networks. Also provides types for adding those contract into a network and type for customContract
 
@@ -37,7 +37,7 @@ export const toklyRegistry = {
   },
 } as const satisfies ContractDict
 
-import { KhizaContractDict } from "@khizadao/chain-dictionary";
+import { KhizaContractDict } from "@khizadao/wagmi-dictionary";
 
 // Iniciate KhizaContractDict
 export const dict = new KhizaContractDict([toklyRegistry]);
@@ -45,7 +45,7 @@ export const dict = new KhizaContractDict([toklyRegistry]);
 // Set the chain
 dict.setChain(1) // Evm chain id for ethereum
 // OR
-import {mainnet} from "@khizadao/chain-dictionary"
+import {mainnet} from "@khizadao/wagmi-dictionary"
 dict.setChain(mainnet.id) // 1
 
 // Using the dict
